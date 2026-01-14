@@ -11,7 +11,7 @@
 - Data types: Dates parsed, Sales/Profit as Decimal.
 - Result: Clean 9.8k-row fact table ready for modeling.
 
-![V1 Fields](screenshots/v1-cleaning.png)
+![V1 Fields](screenshots-v1-cleaning.png)
 
 ## Tech Stack
 - Power BI Desktop (latest)
