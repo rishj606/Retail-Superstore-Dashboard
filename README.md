@@ -36,7 +36,7 @@ V2 focuses on building a reusable semantic model and implementing validated time
 - Added `YearMonth` and a numeric `YearMonth Sort` column to ensure chronological sorting in visuals.
 
 Model relationship (Date ↔ train):
-![V2 Date relationship](screenshot-v2-daterelationship.png)
+![V2 Date relationship](screenshots-v2-daterelationship.png)
 
 ### Measures added in V2 (high level)
 Time intelligence:
