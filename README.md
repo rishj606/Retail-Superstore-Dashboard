@@ -1,11 +1,11 @@
-# Retail Superstore Dashboard 🚀
+# Retail Superstore Dashboard
 
 [![Power BI](https://img.shields.io/badge/Power_BI-EFD24C?style=for-the-badge&logo=PowerBI&logoColor=white)](https://powerbi.microsoft.com/)
 [![PL-300](https://img.shields.io/badge/PL--300-Cert-00B4F0?style=for-the-badge&logo=microsoft)](https://learn.microsoft.com/en-us/credentials/certifications/power-bi-data-analyst/)
 
 **End-to-end Power BI retail analytics project using [Kaggle Superstore dataset](https://www.kaggle.com/datasets/rohitsahoo/sales-forecasting) (9.8k orders). Progressive builds for PL-300 prep.**
 
-## 📋 V1: Data Preparation (2026-01-14)
+## V1: Data Preparation (2026-01-14)
 - Downloaded Rohit Sahoo's Superstore CSV.
 - Power Query ETL: Removed Row ID, Order/Product ID, Postal Code, Country (identifier/static noise).
 - Data types: Dates parsed, Sales/Profit as Decimal.
@@ -65,4 +65,4 @@ In addition to documenting key measures here, all DAX measures can be exported v
 1. Open PBIX → External Tools → DAX Studio (or connect DAX Studio to the PBIX).
 2. Run:
    `SELECT * FROM $SYSTEM.TMSCHEMA_MEASURES`
-3. Export results to CSV/Excel (static) and commit to the repo (e.g., `docs/measures/v2-measures.csv`).
+3. Export results to CSV/Excel (static) and commit to the repo (e.g., `docsmeasuresv2-measures.csv`).
