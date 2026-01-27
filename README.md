@@ -122,25 +122,6 @@ Root-cause analysis using AI-powered Decomposition Tree.
 
 ---
 
-## Repository Structure
-Retail-Superstore-Dashboard/
-├── Retail-Superstore-Dashboard-V1.pbix # Data prep only
-├── Retail-Superstore-Dashboard-V2.pbix # Semantic model + measures
-├── Retail-Superstore-Dashboard-V3.pbix # Polished report (final)
-├── screenshots/ # Progress screenshots
-│ ├── screenshots-v1-cleaning.png
-│ ├── screenshots-v2-daterelationship.png
-│ ├── screenshot-v2-MeasureValidation.png
-│ ├── screenshot-v3-page1-executive-overview.png
-│ ├── screenshot-v3-page1-filtered-2016.png
-│ ├── screenshot-v3-page2-product-performance.png
-│ ├── screenshot-v3-page3-region-performance.png
-│ └── screenshot-v3-page4-drivers.png
-├── docs/
-│ └── measures/
-│ └── v2-measures.csv # DAX measure export
-└── README.md
-
 
 ## License
 Data: [Kaggle Superstore Dataset](https://www.kaggle.com/datasets/rohitsahoo/sales-forecasting) by Rohit Sahoo (CC BY-NC-SA 4.0)  
