@@ -13,8 +13,22 @@ Build a CV/portfolio-ready Power BI dashboard showcasing:
 - Proper semantic modeling (Date table, relationships)
 - Advanced time-intelligence measures (YoY, MoM, YTD, Rolling 12M)
 - Professional report design (interactive slicers, conditional formatting, decomposition analysis)
+- **Advanced UX & Security** (Custom tooltips, App-like navigation, RLS)
 
 **Note**: This dataset contains sales data only (no profit/cost/quantity). The focus is demonstrating **time-intelligence** and **dimensional analysis**, not full P&L modeling.
+
+---
+
+## Tech Stack
+- **Power BI Desktop**: Report authoring and modeling.
+- **Power Query (M)**: Used for ETL (removing static columns, type conversion).
+- **DAX**: Used for all calculated measures and time intelligence.
+- **DAX Studio**: Used to export measure definitions for documentation/version control.
+
+## Quick Start
+1. Download [Retail-Superstore-Dashboard-V4.pbix](Retail-Superstore-Dashboard-V4.pbix)
+2. Open in Power BI Desktop
+3. Navigate using the top-right menu buttons or explore tooltips by hovering over charts.
 
 ---
 
@@ -26,19 +40,10 @@ Build a CV/portfolio-ready Power BI dashboard showcasing:
 
 ![V1 Fields](screenshots/screenshots-v1-cleaning.png)
 
-## Tech Stack
-- Power BI Desktop (latest)
-- Power Query (M language)
-
-## Quick Start
-1. Download [Retail-Superstore-Dashboard-V3.pbix](Retail-Superstore-Dashboard-V3.pbix)
-2. Open in Power BI Desktop
-3. Navigate through the 4 report pages to see the interactive visuals.
-
 ---
 
 ## V2: Semantic Model + Time Intelligence Measures (2026-01-17)
-V2 focuses on building a reusable semantic model and implementing validated time-intelligence measures. Report pages in V2 are for measure validation only.
+V2 focuses on building a reusable semantic model and implementing validated time-intelligence measures.
 
 ### Date Dimension and Relationships
 - Created a dedicated `'Date'` table and marked it as the model Date table.
@@ -48,6 +53,8 @@ V2 focuses on building a reusable semantic model and implementing validated time
 ![V2 Date Relationship](screenshots/screenshots-v2-daterelationship.png)
 
 ### Measures Implemented (V2)
+*All measures exported via DAX Studio to `docs/measures/v2-measures.csv` for version control.*
+
 **Time Intelligence** (monthly grain, driven by `'Date'` table):
 - `Total Sales`, `Sales Prev Month`, `Sales Growth MoM %`, `Sales MoM Δ`
 - `Sales LY` (Last Year), `Sales Growth YoY %`, `Sales YoY Δ`
@@ -105,7 +112,7 @@ Deep-dive into product-level sales with ranking and contribution analysis.
 Geographic analysis with map visualization and state-level breakdown.
 
 **Visuals**:
-- **Sales by State (Bubble Map)**: Hero visual with size = Total Sales
+- **Sales by State (Bubble Map)**: Hero visual, full width, bubble size = Total Sales
 - **Sales by Region (Bar Chart)**: High-level regional comparison
 - **State Performance Matrix**: Detailed state metrics (Total Sales, LY, YoY Δ, YoY %)
 
@@ -122,6 +129,43 @@ Root-cause analysis using AI-powered Decomposition Tree.
 
 ---
 
+## V4: Advanced UX & Security (2026-01-29)
+V4 transforms the report into an "App-like" experience with advanced navigation and security features, focusing on end-user flow and data governance.
+*New measures added (e.g., `Label State Context`) have been appended to the measures documentation.*
+
+### 1. App-Like Navigation & Dynamic Context
+- **Navigation Bar**: Added a custom navigation menu (top-right) to replace standard page tabs.
+- **Dynamic Subtitles**: Implemented DAX-driven subtitles (e.g., *"📍 Showing details for: California"*) that appear only during drillthrough, ensuring users always know their data context.
+
+![V4 Navigation and Subtitle](screenshots/screenshot-v4-nav-and-subtitle.png)
+
+### 2. Custom Tooltips (The "Why" Behind the Data)
+- Replaced standard black text boxes with a custom **Report Page Tooltip** (`TT-Month`).
+- **User Flow**: Executives hovering over a monthly trend spike instantly see the category breakdown driving that specific month's performance without leaving the main view.
+
+![V4 Month Tooltip](screenshots/screenshot-v4-tooltip-month.png)
+
+### 3. Drillthrough Workflow
+- Enabled deep-dive analysis from **Region (Page 3)** to **Product (Page 2)**.
+- Users can right-click any state bubble to investigate specific product performance for that location.
+
+![V4 Drillthrough Menu](screenshots/screenshot-v4-drillthrough-menu.png)
+
+### 4. Security & Data Governance (RLS)
+**Scenario**: This dashboard is deployed to Regional Directors who must be restricted to their own territory's data.
+
+**Implementation**:
+- Utilized **Row-Level Security (RLS)** to enforce strict data boundaries.
+- **Note**: Dynamic RLS (using `USERPRINCIPALNAME`) was designed but implemented as **Static RLS** due to the dataset lacking an employee directory dimension. Roles were created for `West`, `East`, `Central`, and `South`.
+
+**Evidence of Security**:
+*Left: Full Executive Access ($2.3M Sales). Right: Restricted "West Manager" View (Only West Region data visible).*
+
+| Executive View (Unrestricted) | West Manager View (RLS Applied) |
+|:---:|:---:|
+| ![RLS Full Access](screenshots/screenshot-v4-rls-1-full-access.png) | ![RLS Restricted](screenshots/screenshot-v4-rls-2-west-role.png) |
+
+---
 
 ## License
 Data: [Kaggle Superstore Dataset](https://www.kaggle.com/datasets/rohitsahoo/sales-forecasting) by Rohit Sahoo (CC BY-NC-SA 4.0)  
@@ -129,4 +173,4 @@ Code/Report: MIT License
 
 ---
 
-**Author**: [rishj606](https://github.com/rishj606)  
+**Author**: [rishj606](https://github.com/rishj606)
