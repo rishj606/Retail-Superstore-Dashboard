@@ -1,0 +1,71 @@
+﻿Name,,Expression
+Total Sales,,SUM(train[Sales])
+Sales YTD LY,,
+,,CALCULATE(
+,,"   [Sales YTD],"
+,,   SAMEPERIODLASTYEAR('Date'[Date])
+,,)
+Sales YTD,,
+,,TOTALYTD(
+,,"   [Total Sales],"
+,,   'Date'[Date]
+,,)
+Sales YoY Δ,,[Total Sales] - [Sales LY]
+Sales Rolling 12M,,
+,,CALCULATE(
+,,"   [Total Sales],"
+,,"   DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -12, MONTH)"
+,,)
+Sales Rank (Product),,
+,,RANKX(
+,,"   ALLSELECTED(train[Product Name]),"
+,,"   [Total Sales],"
+,,"   ,"
+,,   DESC
+,,)
+Sales Prev Month,,
+,,CALCULATE(
+,,"   [Total Sales],"
+,,   PREVIOUSMONTH('Date'[Date])
+,,)
+Sales MoM Δ,,[Total Sales] - [Sales Prev Month]
+Sales LY,,
+,,CALCULATE(
+,,"   [Total Sales],"
+,,   SAMEPERIODLASTYEAR('Date'[Date])
+,,)
+Sales Growth YoY %,,
+,,VAR CurSales = [Total Sales]
+,,VAR PrevYearSales = [Sales LY]
+,,RETURN
+,,"   DIVIDE(CurSales - PrevYearSales, PrevYearSales, 0)"
+Sales Growth MoM %,,
+,,VAR CurMonth = MONTH(MAX('Date'[Date]))
+,,VAR CurYear = YEAR(MAX('Date'[Date]))
+,,VAR PrevSales =
+,,   CALCULATE(
+,,"       [Total Sales],"
+,,       FILTER(
+,,"           ALL('Date'),"
+,,           MONTH('Date'[Date]) = CurMonth - 1 &&
+,,           YEAR('Date'[Date]) = CurYear
+,,       )
+,,   )
+,,VAR CurSales = [Total Sales]
+,,"RETURN DIVIDE(CurSales - PrevSales, PrevSales, 0)"
+Sales % of Total (Product),,
+,,DIVIDE(
+,,"   [Total Sales],"
+,,   CALCULATE(
+,,"       [Total Sales],"
+,,       REMOVEFILTERS(train[Product Name])
+,,"   ),"
+,,   0
+,,)
+,,
+Label State Content,,Label State Context = 
+,,IF(
+,,"    ISFILTERED(train[State]), "
+,,"    ""📍 Showing details for: "" & SELECTEDVALUE(train[State]), "
+,,"    """""
+,,)
